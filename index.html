@@ -12,6 +12,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f8f9fa;
+            color: #000000;
         }
         .container {
             text-align: center;
@@ -28,12 +29,19 @@
             border-radius: 10px;
         }
         .dark-mode {
-            background-color: #121212;
+            background-color: #000000;
             color: #ffffff;
         }
         .dark-mode .container {
-            background: #1e1e1e;
+            background: #333333;
+            color: #ffffff;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode #map {
+            border: 2px solid #ffffff;
+        }
+        .btn-primary {
+            margin-top: 20px;
         }
     </style>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
