@@ -17,10 +17,28 @@ function getPostcode(latitude, longitude) {
         });
 }
 
+function showMap(latitude, longitude) {
+    const platform = new H.service.Platform({
+        apikey: apiKey,
+        app_id: appId
+    });
+    const defaultLayers = platform.createDefaultLayers();
+    const map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
+        center: { lat: latitude, lng: longitude },
+        zoom: 14,
+        pixelRatio: window.devicePixelRatio || 1
+    });
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    const ui = H.ui.UI.createDefault(map, defaultLayers);
+    const marker = new H.map.Marker({ lat: latitude, lng: longitude });
+    map.addObject(marker);
+}
+
 function showPosition(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     getPostcode(latitude, longitude);
+    showMap(latitude, longitude);
 }
 
 function showError(error) {
@@ -47,5 +65,17 @@ function getLocation() {
         document.getElementById('status').innerText = 'Geolocation is not supported by this browser.';
     }
 }
+
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (document.body.classList.contains('dark-mode')) {
+        themeToggleBtn.innerText = 'Toggle Light Mode';
+    } else {
+        themeToggleBtn.innerText = 'Toggle Dark Mode';
+    }
+}
+
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
 getLocation();
