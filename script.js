@@ -60,7 +60,7 @@ function showError(error) {
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true });
+        navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     } else {
         document.getElementById('status').innerText = 'Geolocation is not supported by this browser.';
     }
